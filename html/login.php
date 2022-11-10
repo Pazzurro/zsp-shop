@@ -8,33 +8,18 @@
     <head>
         <title>zsp-shop</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="styl.css">
     </head>
-    <body style="width: 30%; margin: auto">
-    
-        <?php
-            if(isset($_POST["accountCreating"]))
-            {
-                if($_POST["accountCreating"] = "true")
-                {
-                    $sql = 'INSERT INTO accounts (name, lastname, phone, nick_name, password, is_admin) VALUES
-                        ('.$_POST["userName"].', '.$_POST["userLastname"].', '.$_POST["userPhone"].', '.$_POST["userNick"].', '.$_POST["userPassword"].');
-                    ';
-
-                    // $db->query($sql);
-
-                    echo'
-                        <h2 style="text-align: center"> Konto stworzone! </h2>
-                    ';
-                }
-            }
-        ?>
+    <body style="margin: auto">    
         
-        
+        <div class="header">
+            <p>cos</p>
+        </div>
         
         <form action="login.php" method="post">
             <div style="text-align: center">
                 <h1>ZSP-Shop</h1>
-                <h2>Logowanie</h2>
+                <h2 style="clear: both">Logowanie</h2>
                 
                 <p><label> login: <input type="text" name="userName"></label></p>
                 <p><label> hasło: <input type="password" name="userPassword"></label></p>
@@ -42,6 +27,10 @@
                 <p><span><button type="submit">Log in</button></span><span> --------- </span><span><a href="register.php">Create account</a></span></p>
             </div>
         </form>
+        
+        <div>
+            <a href="advertisments.php">Lista ofert</a>
+        </div>
         
         
         <?php

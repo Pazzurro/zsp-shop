@@ -1,5 +1,9 @@
 <!DOCTYPE HTML>
 
+<?php
+    $db = new mysqli("127.0.0.1", "root", "", "zps-shop-dk")
+?>
+
 <html>
     <head>
         <title>zsp-shop</title>
@@ -7,7 +11,7 @@
     </head>
     <body style="width: 30%; margin: auto">
         
-        <form action="login.php" method="post">
+        <form action="register.php" method="post">
             <div style="text-align: center">
                 <h1>ZSP-Shop</h1>
                 <h2>Tworzenie konta</h2>
@@ -19,12 +23,44 @@
                     <p><label> Podaj nazwisko: <input type="text" name="userLastname"></label></p>
                     <p><label> Podaj numer telefonu: <input type="text" name="userPhone"></label></p>
                     
-                    <input type="hidden" name="accountCreating" value="true">
                 </div>
                 
                 <p><span><button type="submit">Create Account</button></span><span> ------- </span><span><a href="login.php">have account? Log in</a></span></p>
             </div>
         </form>
+        
+        
+        <?php
+            
+            $canCreate = 1;
+            $zero = 0;
+
+            if(isset($_POST["userNick"]) and isset($_POST["userPassword"]) and isset($_POST["userName"]) and isset($_POST["userLastname"]) and isset($_POST["userPhone"]))
+            {
+                if($_POST["userNick"] != "" and $_POST["userPassword"] != "" and $_POST["userName"] != "" and $_POST["userLastname"] != "" and $_POST["userPhone"] != "")
+                {
+                    
+                    $sql = 'INSERT INTO accounts (nick_name, password, name, lastname, phone, is_admin) VALUES ("'.$_POST["userNick"].'", "'.$_POST["userPassword"].'", "'.$_POST["userName"].'", "'.$_POST["userLastname"].'", "'.$_POST["userPhone"].'",' .$zero. ');';
+                    
+                    
+                    $db->query($sql);
+                    
+                    echo'
+                        <h2> Konto stworzone </h2>
+                    ';
+                    
+                }
+                else
+                {
+                    echo'
+                        <h2> Nie wszystkie dane są uzupełnione </h2>
+                    ';
+                }
+            }
+
+            $db->close();
+        
+        ?>
         
     </body>
 </html>
