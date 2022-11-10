@@ -10,11 +10,27 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="styl.css">
     </head>
-    <body style="margin: auto">    
+    <body style="margin: auto; text-align: center">    
         
         <div class="header">
             <p>cos</p>
         </div>
+        
+        
+        <?php
+            if(isset($_POST["logout"]))
+            {
+                if($_POST["logout"] == true)
+                {
+                    echo'
+                        <h2 style="text-align"> nastapiło wylogoawnie </h2> 
+                    ';
+                    
+                    setcookie ("isLogged", false);
+                }
+            }
+        ?>
+        
         
         <form action="login.php" method="post">
             <div style="text-align: center">
@@ -45,8 +61,8 @@
 
                     $username = $_POST["userName"];
                     $password = $_POST["userPassword"];
-
-                    $sql = 'SELECT nick_name, password, is_admin FROM accounts WHERE nick_name = "' .$username. '" AND password = "' .$password. '";';
+                    
+                    $sql = 'SELECT id, nick_name, password, is_admin FROM accounts WHERE nick_name = "' .$username. '" AND password = "' .$password. '";';
 
                     if($result = $db->query($sql))
                     {
@@ -59,6 +75,7 @@
                             setcookie ("isLogged", true);
                             setcookie ("asWho", $row["nick_name"]);
                             setcookie ("isAdmin", $row["is_admin"]);
+                            setcookie ("loggedID", $row["id"]);
                         }
                         else
                         {

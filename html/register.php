@@ -8,8 +8,9 @@
     <head>
         <title>zsp-shop</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="styl.css">
     </head>
-    <body style="width: 30%; margin: auto">
+    <body style="width: 40%; margin: auto">
         
         <form action="register.php" method="post">
             <div style="text-align: center">

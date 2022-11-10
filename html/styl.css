@@ -1,5 +1,58 @@
+body
+{
+    background-color: #f3ca92;
+}
+
 .header
 {
     background-color: orange;
     height: 70px;
+    text-align: center;
+}
+
+.headerElement
+{
+    text-align: center;
+    width: 100%;
+}
+
+.headerButton
+{
+    height: 70px;
+    width: 160px;
+    margin-left: 5%;
+    float: left;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.headerButton:hover
+{
+    background-color: #cc8400;
+}
+
+.offertsLogo
+{
+    padding-top: 70px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.offert
+{
+    width: 300px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.yourOffert
+{
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    width: 300px;
+    height: 100px;
+    margin: auto;
+    margin-top: 30px;
 }
