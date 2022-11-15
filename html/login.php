@@ -13,7 +13,7 @@
     <body style="margin: auto; text-align: center">    
         
         <div class="header">
-            <p>cos</p>
+            <h1>ZSP-shop</h1>
         </div>
         
         

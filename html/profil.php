@@ -6,7 +6,7 @@
     $sql_buyList = 'SELECT advertisments.title, advertisments.price FROM advertisments JOIN orders ON advertisments.id = orders.advertisments_id WHERE advertisments.id = '.$_COOKIE["loggedID"].';';
 
 
-    $sql_offertList = 'SELECT title, price FROM `advertisments` WHERE accounts_id = '.$_COOKIE["loggedID"].';';
+    $sql_offertList = 'SELECT id, title, price FROM `advertisments` WHERE accounts_id = '.$_COOKIE["loggedID"].';';
 ?>
 
 <html>
@@ -25,22 +25,35 @@
                         <div class="header">
                             <div class="headerElement">
                                 
-                                <p style="float: left; font-size: 20px; margin-left: 10px"> zalogowany jako: ' .$_COOKIE["asWho"]. '</p>
-                            
+                                <p style="float: left; font-size: 20px; margin-left: 10px"><span> zalogowany jako: ' .$_COOKIE["asWho"]. '</span>
+                                
+                                ';
+                                
+                                if($_COOKIE["isAdmin"] == 1)
+                                {
+                                    echo'
+                                        <span> [administrator]</span>
+                                    ';
+                                }
+                                
+                            echo'
                                 <form action="login.php" method="POST">
 
                                     <input type="hidden" name="logout" value="true">
 
                                     <button class="headerButton" type="submit"> Wyloguj się </button>
+                                    
+                                    
                                 </form>
                                 
                                 <form action="profil.php">
                                     <button class="headerButton" type="submit"> Profil </button>
                                 </form>
-                                    
+                                
                                 <form action="advertisments.php">
                                     <button class="headerButton" type="submit"> Ogłoszenia </button>
                                 </form>
+                                    
                             </div>
                         </div>
                     ';
@@ -87,10 +100,20 @@
                         {
                             echo'
                             
-                                <div class="yourOffert">
+                                <button class="offert">
                                     <h3> ' .$row["title"]. ' </h3>
-                                    <span style="margin-left: 90px"> ' .$row["price"]. 'PLN </span> <button style="margin-left: 30px">edytuj</button>
-                                </div>
+                                    <b> ' .$row["price"]. 'ZŁ </b>
+                                    <br>
+                                    
+                                    <form action="offert.php" method="GET">
+                                    
+                                        <input type="hidden" name="id" value='.$row["id"].'>
+                                        <input type="hidden" name="canBuy" value="false">
+                                        <button type="submit"> Edytuj </button>
+                                    </form>
+                                </button>
+                                <br>
+                                <br>
                                 <br>
                             ';
                         }
@@ -108,15 +131,16 @@
                         while($row = $res->fetch_array())
                         {
                             echo'
-                            
-                                <div class="yourOffert">
-                                    <h3> ' .$row["title"]. ' </h3>
-                                    <span style="margin-left: 90px"> ' .$row["price"]. 'PLN </span> <button style="margin-left: 30px">edytuj</button>
-                                </div>
+                                <button class="offert">
+                                    <h3> ' .$row["title"]. ' <h3>
+                                    <h4> ' .$row["price"]. 'PLN</h4>
+                                </button>
                                 <br>
                             ';
                         }
                     }
+                
+                    $db->close();
                 ?>
             </div>
         </div>
