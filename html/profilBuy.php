@@ -100,7 +100,7 @@
         ?>
         
 
-        <div style="width: 50%; float: left; text-align: center">
+        <div style="width: 30%; margin: auto; margin-top: 200px;padding: 70px; background-color: #ffe199">   
                 <?php
                     
                     if($res = $db->query($sql_buyList))

@@ -70,7 +70,11 @@
                         
                         <form action="login.php">
                             <button class="headerButton" type="submit"> Zaloguj się </button>
-                        </form>     
+                        </form>
+                        
+                        <form action="advertisments.php">
+                            <button class="headerButton" type="submit"> Ogłoszenia </button>
+                        </form>
                     </div>   
                 ';
             }

@@ -101,8 +101,7 @@
         
         
         
-        <div style="width: 80%; margin: auto">
-            <div style="width: 50%; float: left; text-align: center">   
+        <div style="width: 30%; margin: auto; margin-top: 200px;padding: 70px; background-color: #ffe199">  
                 <?php
                     
                     if($res = $db->query($sql_offertList))
@@ -110,19 +109,22 @@
                         while($row = $res->fetch_array())
                         {
                             echo'
-                            
                                 <form class="offertList" action="offert.php" method="GET">
                         
                                     <input type="hidden" name="id" value='.$row["id"].'>
-                                    <input type="hidden" name="canBuy" value="true">
 
                                     <button class="offert" type="submit">
                                         <h3> ' .$row["title"]. ' <h3>
                                         <h4> ' .$row["price"]. 'PLN</h4>
                                     </button>
-                                    <br>
-                                    <br>
-                                    <br>
+                                </form>
+                                
+                                <br>
+                                
+                                <form class="offertList" style="margin-top: 2px" action="editOffert.php" method="POST">
+                                    <input type="hidden" name="id" value='.$row["id"].'>
+                                            
+                                    <button type="submit"> EDYTUJ </button>
                                 </form>
                             ';
                         }
@@ -130,7 +132,6 @@
                     
                 ?>
                 
-            </div> 
         </div>
     </body>
 </html>

@@ -23,7 +23,7 @@
                 if($_POST["logout"] == true)
                 {
                     echo'
-                        <h2 style="text-align"> nastapiło wylogoawnie </h2> 
+                        <h2 style="text-align"> nastapiło wylogowanie </h2> 
                     ';
                     
                     setcookie ("isLogged", false);
