@@ -4,6 +4,10 @@
     $db = new mysqli("127.0.0.1", "root", "", "zps-shop-dk");
 
     $sql = 'SELECT advertisments.title, advertisments.content, advertisments.price, product_type.type FROM advertisments JOIN product_type ON advertisments.product_type_id = product_type.id WHERE advertisments.id = '.$_GET["id"].';';
+
+    $sqlStatus = 'SELECT status.status FROM status JOIN orders ON status.id = orders.status_id WHERE orders.advertisments_id = '.$_GET["id"].';';
+
+    
 ?>
 
 <html>
@@ -43,7 +47,7 @@
                                     
                                 </form>
                                 
-                                <form action="profil.php">
+                                <form action="profilBuy.php">
                                     <button class="headerButton" type="submit"> Profil </button>
                                 </form>
                                 
@@ -76,6 +80,25 @@
             {
                 if($row = $result->fetch_array())
                 {
+                    if(!isset($_GET["canBuy"]))
+                    {
+                        
+                        echo'
+                            <h1> ZAKOŃCZONE </h1>
+                        ';
+                        
+                        if($res = $db->query($sqlStatus))
+                        {
+                            if($rowStatus = $res->fetch_array())
+                            {
+                                echo'
+                                    <h2> Status zamówienia: '.$rowStatus["status"].' </h2>
+                                ';
+                            }
+                        }
+                    }
+                    
+                    
                     echo'
 
                         <h1>Ogłoszenie nr: '.$_GET["id"].'</h1>
@@ -89,18 +112,21 @@
                         <h4>'.$row["content"].'</h4>
                     ';  
                     
-                    if($_GET["canBuy"] == "true")
+                    if(isset($_GET["canBuy"]) && isset($_COOKIE["isLogged"]))
                     {
                         echo'
-                            <form>
-                                <button> KUP </button>
+                            <form action="buy.php" method="POST">
+                                <input type="hidden" name="id" value='.$_GET["id"].'>
+
+                                <button type="submit"> KUP </button>
                             </form>
-                        ';
+                        ';  
+                        
                     }
                 }
             }
               
-            
+            $db->close();
         ?>
     </body>
 </html>

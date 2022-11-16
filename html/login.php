@@ -29,6 +29,16 @@
                     setcookie ("isLogged", false);
                 }
             }
+        
+            if(isset($_GET["a"]))
+            {
+                if($_GET["a"] == "si")
+                {
+                    echo'
+                        <h2 style="text-align"> Konto stworzone </h2> 
+                    ';
+                }
+            }
         ?>
         
         
@@ -76,6 +86,8 @@
                             setcookie ("asWho", $row["nick_name"]);
                             setcookie ("isAdmin", $row["is_admin"]);
                             setcookie ("loggedID", $row["id"]);
+                            
+                            header("location: advertisments.php");
                         }
                         else
                         {

@@ -34,7 +34,7 @@
                                     
                                 </form>
                                 
-                                <form action="profil.php">
+                                <form action="profilBuy.php">
                                     <button class="headerButton" type="submit"> Profil </button>
                                 </form>
                                 

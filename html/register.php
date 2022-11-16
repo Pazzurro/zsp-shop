@@ -47,8 +47,10 @@
                     $db->query($sql);
                     
                     echo'
-                        <h2> Konto stworzone </h2>
+                        <h2> Konto stworzone </h2> 
                     ';
+                    
+                    header("location: login.php?a=si");
                     
                 }
                 else

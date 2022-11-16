@@ -3,7 +3,9 @@
 <?php
     $db = new mysqli("127.0.0.1", "root", "", "zps-shop-dk");
 
-    $sql = 'SELECT advertisments.title, advertisments.content, advertisments.price, product_type.type FROM advertisments JOIN product_type ON advertisments.product_type_id = product_type.id WHERE advertisments.id = '.$_GET["id"].';';
+    $sqlOffert = 'SELECT advertisments.title, advertisments.price FROM advertisments WHERE advertisments.id = '.$_POST["id"].';';
+    
+    $sqlNewOrder = 'INSERT INTO orders (accounts_id, advertisments_id, status_id, created_at, post_number, city, street, house_number) VALUES';
 ?>
 
 <html>
@@ -43,7 +45,7 @@
                                     
                                 </form>
                                 
-                                <form action="profil.php">
+                                <form action="profilBuy.php">
                                     <button class="headerButton" type="submit"> Profil </button>
                                 </form>
                                 
@@ -71,6 +73,58 @@
                 ';
             }
             
+        
+            if($result = $db->query($sqlOffert))
+            {
+                if($row = $result->fetch_array())
+                {
+                    echo'
+                        <div>
+                            <h1>KUPUJESZ</h1>
+                            <b><p style="font-size: 20">'.$row["title"].'      '.$row["price"].'PLN; 
+                            <br><br><br>
+                        </div>
+                        <form action="buy.php" method="POST">
+                        
+                        <div>
+                            <h1> DANE DO ZAMÓWIENIA <h2>
+                            <br>
+                            <label> Kod pocztowy <input type="text" name="post"></label><br>
+                            <label> Miasto <input type="text" name="city"></label><br>
+                            <label> Ulica <input type="text" name="street"></label><br>
+                            <label> Numer domu <input type="text" name="nr"></label><br>
+                            
+                            <input type="hidden" name="id" value='.$_POST["id"].'>
+                            <input type="hidden" name="buy" value="true">
+                            <br><br><br>
+                            
+                            <button type="submit">KUP</button>
+                            
+                        </div>
+                    ';
+                    
+                    if(isset($_POST["buy"]))
+                    {
+                        if(isset($_POST["post"]) && isset($_POST["city"]) && isset($_POST["street"]) && isset($_POST["nr"]))
+                        {
+                            $a = 1;
+                            
+                            $db->query($sqlNewOrder .'('.$_COOKIE["loggedID"].', '.$_POST["id"].', '.$a.','.date('y-m-d').', "'.$_POST["post"].'", "'.$_POST["city"].'", "'.$_POST["street"].'", '.$_POST["nr"].');');
+                            
+                            header('Location: finalize.php?a=no');
+                        }
+                        else
+                        {
+                            echo'
+                                <h3> Nie podano wszystkich danych </h3>
+                            ';
+                        }
+                    }
+                }
+            }
+        
+            $db->close();
         ?>
+        
     </body>
 </html>
